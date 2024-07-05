@@ -93,21 +93,14 @@ SMODS.ConsumableType { --Gear Consumable Type
     collection_rows = { 4,3 },
     primary_colour = G.C.CHIPS,
     secondary_colour = G.C.MONEY,
-    loc_txt = {
-        collection = 'Gear Cards',
-        name = 'Gear',
-        label = 'Gear'
-    },
+    loc_txt = {},
     shop_rate = 3,
     default = 'c_robl_sword'
 }
 
 SMODS.Joker {  --Noob
     key = 'noob',
-    loc_txt = {
-        name = 'Noob',
-        text = {'+#1# {C:attention}Consumable Slot{}'}
-    },
+    loc_txt = {},
     config = {extra = {slots = 1}},
     rarity = 1,
     pos = {x = 0,y = 0},
@@ -129,12 +122,7 @@ SMODS.Joker {  --Noob
 
 SMODS.Joker { --Glass Houses
     key = 'glasshouses',
-    loc_txt = {
-        name = 'Glass Houses',
-        text = { 'Scored {C:attention}Glass Cards{} have a',
-        '{C:green}#1# in 4{} chance to be',
-        '{C:attention}copied{} and drawn to hand'}
-    },
+    loc_txt = {},
     config = {},
     rarity = 2, 
     pos = {x = 2,y = 0}, 
@@ -173,11 +161,7 @@ SMODS.Joker { --Glass Houses
 
 SMODS.Joker { --1x1x1x1
     key = '1x1x1x1',
-    loc_txt = {
-        name = '1x1x1x1',
-        text = { '{C:mult}+#1#{} Mult if played',
-        'hand has {C:attention}4{} scoring {C:attention}Aces{}'}
-    },
+    loc_txt = {},
     config = {extra = {mult = 40}},
     rarity = 2, 
     pos = {x = 1,y = 0}, 
@@ -212,13 +196,7 @@ SMODS.Joker { --1x1x1x1
 
 SMODS.Joker { --Banland
     key = 'banland',
-    loc_txt = {
-        name = 'Banland',
-        text = {'When sold, {C:attention}destroy{} every {C:attention}consumable{}',
-        'in your consumable area',
-        'Gain {C:money}$#1#{} per consumable destroyed',
-        '{C:inactive}Will give {C:money}$#2#'}
-    },
+    loc_txt = {},
     config = {extra = {dollars = 7, willgive = 0}},
     rarity = 1,
     pos = {x = 6,y = 0},
@@ -267,13 +245,8 @@ SMODS.Joker { --Banland
 
 SMODS.Joker { --Egg Hunt
     key = 'egghunt',
-    loc_txt = {
-        name = 'Egg Hunt',
-        text = {'{C:mult}+#1#{} Mult if full deck',
-        'contains {C:attention}52 unique cards{}',
-        '{C:inactive}[#2#]'}
-    },
-    config = {extra = {mult = 15, active = 'Inactive'}},
+    loc_txt = {},
+    config = {extra = {mult = 15, active = localize('k_inactive')}},
     rarity = 1,
     pos = {x = 3,y = 0},
     atlas = 'jokeratlas',
@@ -286,7 +259,7 @@ SMODS.Joker { --Egg Hunt
     end,
     calculate = function(self,card,context)
         if context.joker_main then
-            if card.ability.extra.active == 'Active' then
+            if card.ability.extra.active == localize('k_active') then
                 return {
                     message = localize{type='variable',key='a_mult',vars={card.ability.extra.mult}},
                     mult_mod = card.ability.extra.mult
@@ -295,7 +268,7 @@ SMODS.Joker { --Egg Hunt
         end
     end,
     update = function(self,card,dt)
-        card.ability.extra.active = 'Inactive'
+        card.ability.extra.active = localize('k_inactive')
         if G.STAGE == G.STAGES.RUN then
             local uniquecards = {}
             for i, v in pairs (G.playing_cards) do
@@ -312,7 +285,7 @@ SMODS.Joker { --Egg Hunt
                 end
             end
             if #uniquecards >= 52 then
-                card.ability.extra.active = 'Active'
+                card.ability.extra.active = localize('k_active')
             end
         end
     end
@@ -320,13 +293,7 @@ SMODS.Joker { --Egg Hunt
 
 SMODS.Joker { --SFoTH
     key = 'sfoth',
-    loc_txt = {
-        name = 'SFoTH',
-        text = {'When {C:attention}blind selected{}, {C:attention}destroy{}',
-        'every {C:money}Gear{} in your consumable',
-        'area and replace with a',
-        '{C:dark_edition}Negative{} {C:purple}Spectral{} card'}
-    },
+    loc_txt = {},
     config = {extra = {spectrals = 1}},
     rarity = 3,
     pos = {x = 4,y = 0},
@@ -372,13 +339,7 @@ SMODS.Joker { --SFoTH
 
 SMODS.Joker {  --Bacon Hair
     key = 'baconhair',
-    loc_txt = {
-        name = 'Bacon Hair',
-        text = {'{C:chips}+#2#{} Chips, {C:chips}+#3#{} additional',
-            'Chips for each {C:attention}consumable{} in',
-            'your consumable area',
-            '{C:inactive}Currently {C:chips}+#1#{C:inactive} Chips'}
-    },
+    loc_txt = {},
     config = {extra = {chips = 40, freechips = 40, gainedchips = 40}},
     rarity = 1,
     pos = {x = 5,y = 0},
@@ -531,20 +492,14 @@ SMODS.Joker { --Adopt Me
         end
     end,
     calc_dollar_bonus = function(self)
-		local bonus = self.ability.extra.money
+		local bonus = self.config.extra.money
         if bonus > 0 then return bonus end
 	end
 }
 
 SMODS.Consumable { --Sword
     key = 'sword',
-    loc_txt = {
-        name = 'Sword',
-        text = {'{C:attention}Destroys 2{} selected cards with',
-        'a {C:green}#3# in 3{} chance or {C:attention}Duplicates 1{}',
-        'selected card {C:attention}without its enhancement{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 0,y = 0}, 
     atlas = 'gearatlas', 
@@ -594,7 +549,7 @@ SMODS.Consumable { --Sword
             else
                 G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.4, func = function()
                     attention_text({
-                        text = 'Miss :(',
+                        text = localize('k_miss'),
                         scale = 1.3, 
                         hold = 1.4,
                         major = card,
@@ -632,13 +587,7 @@ SMODS.Consumable { --Sword
 
 SMODS.Consumable { --Trowel
     key = 'trowel',
-    loc_txt = {
-        name = 'Trowel',
-        text = {'Randomly convert {C:attention}2{} selected',
-        'cards into {C:dark_edition}Foil{},',
-        '{C:attention}Bonus{}, or {C:attention}Stone Cards{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 1,y = 0}, 
     atlas = 'gearatlas', 
@@ -686,13 +635,7 @@ SMODS.Consumable { --Trowel
 
 SMODS.Consumable { --Bloxy Cola
     key = 'bloxycola',
-    loc_txt = {
-        name = 'Bloxy Cola',
-        text = {'Randomly convert {C:attention}2{} selected',
-        'cards into {C:dark_edition}Holographic{},',
-        '{C:attention}Mult{}, or {C:attention}Lucky Cards{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 2,y = 0}, 
     atlas = 'gearatlas', 
@@ -740,13 +683,7 @@ SMODS.Consumable { --Bloxy Cola
 
 SMODS.Consumable { --Magic Carpet
     key = 'magiccarpet',
-    loc_txt = {
-        name = 'Magic Carpet',
-        text = {'Randomly convert {C:attention}2{} selected',
-        'cards into {C:dark_edition}Polychrome{},',
-        '{C:attention}Glass{}, or {C:attention}Steel Cards{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 3,y = 0}, 
     atlas = 'gearatlas', 
@@ -794,12 +731,7 @@ SMODS.Consumable { --Magic Carpet
 
 SMODS.Consumable { --Slingshot
     key = 'slingshot',
-    loc_txt = {
-        name = 'Slingshot',
-        text = {'Level up a {C:attention}random{}',
-        'hand {C:attention}#3# times{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 4,y = 0}, 
     atlas = 'gearatlas', 
@@ -837,13 +769,7 @@ SMODS.Consumable { --Slingshot
 
 SMODS.Consumable { --Superball
     key = 'superball',
-    loc_txt = {
-        name = 'Superball',
-        text = {'Convert {C:attention}1{} selected card into a',
-        '{C:attention}Wild Card{} or apply a random {C:attention}Seal{}',
-        'to a selected {C:attention}Wild Card{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 5,y = 0}, 
     atlas = 'gearatlas', 
@@ -900,13 +826,7 @@ SMODS.Consumable { --Superball
 
 SMODS.Consumable { --Boombox
     key = 'boombox',
-    loc_txt = {
-        name = 'Boombox',
-        text = {'{C:green}#4# in 2{} chance to',
-        'reduce {C:attention}Reroll{} cost by {C:money}$#3#{}',
-        'for the {C:attention}rest of this shop{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 6,y = 0}, 
     atlas = 'gearatlas', 
@@ -974,13 +894,7 @@ SMODS.Consumable { --Boombox
 
 SMODS.Consumable { --Paintball Gun
     key = 'paintballgun',
-    loc_txt = {
-        name = 'Paintball Gun',
-        text = {'Convert all {C:attention}#3#{} in hand into',
-        '{C:attention}random enhanced and sealed{} cards',
-        '{C:money}#2#/#1# uses left{}',
-        '{C:inactive}Suit changes every round{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 7,y = 0}, 
     atlas = 'gearatlas', 
@@ -1032,13 +946,7 @@ SMODS.Consumable { --Paintball Gun
 
 SMODS.Consumable { --Gravity Coil
     key = 'gravitycoil',
-    loc_txt = {
-        name = 'Gravity Coil',
-        text = {'If selected hand is a {C:attention}Straight{},',
-        '{C:attention}Full House{}, or a {C:attention}Five of a Kind{},',
-        'make all cards {C:attention}Wild Cards{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 0,y = 1}, 
     atlas = 'gearatlas', 
@@ -1083,11 +991,7 @@ SMODS.Consumable { --Gravity Coil
 
 SMODS.Consumable { --Speed Coil
     key = 'speedcoil',
-    loc_txt = {
-        name = 'Speed Coil',
-        text = {'Get a random {C:attention}Tag{}',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 1,y = 1}, 
     atlas = 'gearatlas', 
@@ -1129,13 +1033,7 @@ SMODS.Consumable { --Speed Coil
 
 SMODS.Consumable { --Ban Hammer
     key = 'banhammer',
-    loc_txt = {
-        name = 'Ban Hammer',
-        text = {'{C:attention}Destroy the {C:attention}leftmost{}',
-        'Joker and apply an {C:dark_edition}Edition{}',
-        'to a random Joker',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 2,y = 1}, 
     atlas = 'gearatlas', 
@@ -1183,12 +1081,7 @@ SMODS.Consumable { --Ban Hammer
 
 SMODS.Consumable { --Zombie Staff
     key = 'zombiestaff',
-    loc_txt = {
-        name = 'Zombie Staff',
-        text = {'Create a random {C:dark_edition}Negative',
-        '{C:attention}Common Joker{} or {C:purple}Tarot{} Card',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 3,y = 1}, 
     atlas = 'gearatlas', 
@@ -1246,13 +1139,7 @@ SMODS.Consumable { --Zombie Staff
 
 SMODS.Consumable { --Rocket Launcher
     key = 'rocketlauncher',
-    loc_txt = {
-        name = 'Rocket Launcher',
-        text = {'{C:attention}Destroy{} 1 selected card and either',
-        'all cards of the same {C:attention}rank{} or',
-        '{C:attention}suit{} in hand, chosen {C:attention}randomly',
-        '{C:money}#2#/#1# uses left{}'}
-    },
+    loc_txt = {},
     set = 'Gear',
     pos = {x = 4,y = 1}, 
     atlas = 'gearatlas', 
