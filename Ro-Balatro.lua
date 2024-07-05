@@ -503,11 +503,11 @@ SMODS.Consumable { --Sword
     set = 'Gear',
     pos = {x = 0,y = 0}, 
     atlas = 'gearatlas', 
-    config = {extra = {maxuses = 3, currentuses = 3}},
+    config = {extra = {maxuses = 3, currentuses = 3}, consumable = {mod_num = 2}},
     discovered = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,G.GAME.probabilities.normal*2}}
+        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,G.GAME.probabilities.normal*2,card.ability.consumable.mod_num,card.ability.consumable.mod_num-1}}
     end,
     keep_on_use = function(self,card)
         if card.ability.extra.currentuses > 1 then
@@ -517,14 +517,14 @@ SMODS.Consumable { --Sword
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if 2 >= #G.hand.highlighted and #G.hand.highlighted >= 1 then
+                if card.ability.consumeable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end
         end
     end,
     use = function(self,card,area,copier)
-        if #G.hand.highlighted == 2 then
+        if #G.hand.highlighted == self.config.consumable.mod_num then
             if pseudorandom('sword') < G.GAME.probabilities.normal*2/3 then
                 local destroyed_cards = {}
                 for i=#G.hand.highlighted, 1, -1 do
@@ -564,7 +564,7 @@ SMODS.Consumable { --Sword
                         card:juice_up(0.3, 0.5)
                 return true end }))
             end
-        elseif #G.hand.highlighted == 1 then
+        elseif #G.hand.highlighted == 1 or self.config.consumable.mod_num ~= 2 then
             local _card = copy_card(G.hand.highlighted[1], nil, nil, G.playing_card)
             _card:add_to_deck()
             G.deck.config.card_limit = G.deck.config.card_limit + 1
@@ -591,11 +591,11 @@ SMODS.Consumable { --Trowel
     set = 'Gear',
     pos = {x = 1,y = 0}, 
     atlas = 'gearatlas', 
-    config = {extra = {maxuses = 3, currentuses = 3}},
+    config = {extra = {maxuses = 3, currentuses = 3}, consumable = {mod_num = 2}},
     discovered = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses}}
+        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,card.ability.consumable.mod_num}}
     end,
     keep_on_use = function(self,card)
         if card.ability.extra.currentuses > 1 then
@@ -605,7 +605,7 @@ SMODS.Consumable { --Trowel
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if #G.hand.highlighted and #G.hand.highlighted == 1 or #G.hand.highlighted and #G.hand.highlighted == 2 then
+                if self.config.consumable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end
@@ -639,11 +639,11 @@ SMODS.Consumable { --Bloxy Cola
     set = 'Gear',
     pos = {x = 2,y = 0}, 
     atlas = 'gearatlas', 
-    config = {extra = {maxuses = 3, currentuses = 3}},
+    config = {extra = {maxuses = 3, currentuses = 3}, consumable = {mod_num = 2}},
     discovered = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses}}
+        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,card.ability.consumable.mod_num}}
     end,
     keep_on_use = function(self,card)
         if card.ability.extra.currentuses > 1 then
@@ -653,7 +653,7 @@ SMODS.Consumable { --Bloxy Cola
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if #G.hand.highlighted and #G.hand.highlighted == 1 or #G.hand.highlighted and #G.hand.highlighted == 2 then
+                if self.config.consumable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end
@@ -687,11 +687,11 @@ SMODS.Consumable { --Magic Carpet
     set = 'Gear',
     pos = {x = 3,y = 0}, 
     atlas = 'gearatlas', 
-    config = {extra = {maxuses = 2, currentuses = 2}},
+    config = {extra = {maxuses = 2, currentuses = 2}, consumable = {mod_num = 2}},
     discovered = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses}}
+        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,card.ability.consumable.mod_num}}
     end,
     keep_on_use = function(self,card)
         if card.ability.extra.currentuses > 1 then
@@ -701,7 +701,7 @@ SMODS.Consumable { --Magic Carpet
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if #G.hand.highlighted and #G.hand.highlighted == 1 or #G.hand.highlighted and #G.hand.highlighted == 2 then
+                if self.config.consumable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end
@@ -773,11 +773,11 @@ SMODS.Consumable { --Superball
     set = 'Gear',
     pos = {x = 5,y = 0}, 
     atlas = 'gearatlas', 
-    config = {extra = {maxuses = 6, currentuses = 6}},
+    config = {extra = {maxuses = 6, currentuses = 6}, consumable = {mod_num = 1}},
     discovered = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses}}
+        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,card.ability.consumable.mod_num}}
     end,
     keep_on_use = function(self,card)
         if card.ability.extra.currentuses > 1 then
@@ -787,7 +787,7 @@ SMODS.Consumable { --Superball
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if #G.hand.highlighted and #G.hand.highlighted == 1 then
+                if self.config.consumable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end
@@ -1143,11 +1143,11 @@ SMODS.Consumable { --Rocket Launcher
     set = 'Gear',
     pos = {x = 4,y = 1}, 
     atlas = 'gearatlas', 
-    config = {extra = {maxuses = 4, currentuses = 4}},
+    config = {extra = {maxuses = 4, currentuses = 4}, consumable = {mod_num = 1}},
     discovered = true,
     cost = 6,
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses}}
+        return {vars = {card.ability.extra.maxuses,card.ability.extra.currentuses,card.ability.consumable.mod_num}}
     end,
     keep_on_use = function(self,card)
         if card.ability.extra.currentuses > 1 then
@@ -1157,7 +1157,7 @@ SMODS.Consumable { --Rocket Launcher
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if #G.hand.highlighted and #G.hand.highlighted == 1 then
+                if self.config.consumable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end

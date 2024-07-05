@@ -17,17 +17,18 @@ return {
 				["name"] = "剑",
 				["text"] = {
 					"按选定卡牌张数分别触发效果：",
-					"{C:attention}2{}张：有{C:green}#3#/3{}的几率摧毁之",
-					"{C:attention}1{}张：生成一张{C:attention}无增强{}的{C:attention}复制",
+					"{C:attention}#4#{}张：有{C:green}#3#/3{}的几率摧毁之",
+					"{C:attention}#5#{}张：生成{C:attention}无增强{}的{C:attention}复制",
 					"{C:money}可使用#2#/#1#次",
+					"按选定卡牌张数分别触发效果："
 				},
 			},
 			["c_robl_slingshot"] = {
-				["name"] = "Slingshot",
+				["name"] = "弹弓",
 				["text"] = {
-					"Level up a {C:attention}random{}",
-					"hand {C:attention}#3# times{}",
-					"{C:money}#2#/#1# uses left{}",
+					"将{C:attention}随机{}一个牌型",
+					"提升{C:attention}#3#{}级",
+					"{C:money}可使用#2#/#1#次",
 				},
 			},
 			["c_robl_boombox"] = {
@@ -40,10 +41,10 @@ return {
 				},
 			},
 			["c_robl_speedcoil"] = {
-				["name"] = "Speed Coil",
+				["name"] = "速度线圈",
 				["text"] = {
-					"Get a random {C:attention}Tag{}",
-					"{C:money}#2#/#1# uses left{}",
+					"随机获得一个{C:attention}标签",
+					"{C:money}可使用#2#/#1#次",
 				},
 			},
 			["c_robl_paintballgun"] = {
@@ -67,7 +68,7 @@ return {
 			["c_robl_bloxycola"] = {
 				["name"] = "乐思可乐",
 				["text"] = {
-					"将{C:attention}2{}张选定卡牌随机转换为",
+					"将{C:attention}#3#{}张选定卡牌随机转换为",
 					"{C:dark_edition}镭射{}、{C:attention}倍率牌{}或{C:attention}幸运牌",
 					"{C:money}可使用#2#/#1#次",
 				},
@@ -75,7 +76,7 @@ return {
 			["c_robl_rocketlauncher"] = {
 				["name"] = "火箭发射器",
 				["text"] = {
-					"将选定的1张卡牌{C:attention}摧毁",
+					"将选定的#3#张卡牌{C:attention}摧毁",
 					"且{C:attention}有可能{}一并摧毁手牌中与其",
 					"{C:attention}点数{}或{C:attention}花色{}相同的所有卡牌",
 					"{C:money}可使用#2#/#1#次",
@@ -91,21 +92,21 @@ return {
 				},
 			},
 			["c_robl_magiccarpet"] = {
-				["name"] = "Magic Carpet",
+				["name"] = "魔法飞毯",
 				["text"] = {
-					"Randomly convert {C:attention}2{} selected",
-					"cards into {C:dark_edition}Polychrome{},",
-					"{C:attention}Glass{}, or {C:attention}Steel Cards{}",
-					"{C:money}#2#/#1# uses left{}",
+					"将{C:attention}#3#{}张选定卡牌随机转换为",
+					"{C:dark_edition}多彩{}、{C:attention}玻璃牌{}或{C:attention}钢铁牌",
+					"{C:money}可使用#2#/#1#次",
 				},
 			},
 			["c_robl_superball"] = {
-				["name"] = "Superball",
+				["name"] = "超级球",
 				["text"] = {
-					"Convert {C:attention}1{} selected card into a",
-					"{C:attention}Wild Card{} or apply a random {C:attention}Seal{}",
-					"to a selected {C:attention}Wild Card{}",
-					"{C:money}#2#/#1# uses left{}",
+					"将{C:attention}#3#{}张选定卡牌",
+					"随机转换为{C:attention}百搭牌",
+					"若其已为{C:attention}百搭牌",
+					"则为其打上随机的{C:attention}蜡封",
+					"{C:money}可使用#2#/#1#次",
 				},
 			},
 			["c_robl_gravitycoil"] = {
@@ -120,7 +121,7 @@ return {
 			["c_robl_trowel"] = {
 				["name"] = "抹泥刀",
 				["text"] = {
-					"将{C:attention}2{}张选定卡牌随机转换为",
+					"将{C:attention}#3#{}张选定卡牌随机转换为",
 					"{C:dark_edition}闪箔{}、{C:attention}奖励牌{}或{C:attention}石头牌",
 					"{C:money}可使用#2#/#1#次",
 				},
