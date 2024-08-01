@@ -517,7 +517,7 @@ SMODS.Consumable { --Sword
     can_use = function(self,card)
         if card.ability.extra.currentuses > 0 then
             if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK or G.STATE == G.STATES.PLANET_PACK then
-                if card.ability.consumeable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
+                if card.ability.consumable.mod_num >= #G.hand.highlighted + (self.area == G.hand and -1 or 0) and #G.hand.highlighted + (self.area == G.hand and -1 or 0) >= 1 then
                     return true
                 end
             end

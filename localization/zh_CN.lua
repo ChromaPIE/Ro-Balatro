@@ -1,3 +1,5 @@
+-- Simplified Chinese localization by ChromaPIE
+
 return {
 	["misc"] = {
 		["dictionary"] = {
